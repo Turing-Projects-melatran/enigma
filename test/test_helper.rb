@@ -2,4 +2,6 @@ require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/keys'
+require 'mocha/minitest'
+require './lib/key'
+require './lib/offset'
