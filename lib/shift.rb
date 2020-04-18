@@ -12,6 +12,6 @@ class Shift
   def make_shift
     keys_hash = @keys.make_keys
     offset_hash = @offset.make_offset
-    keys_hash.merge(offset_hash){|key, oldval, newval| newval + oldval}
+    keys_hash.merge(offset_hash){|letter, keys, offsets| keys + offsets}
   end
 end
