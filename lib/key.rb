@@ -1,25 +1,25 @@
 class Key
-  attr_reader :number, :keys
+  attr_reader :number
 
   def initialize(number = generate_random)
     @number = number
-    @keys = {}
   end
 
   def generate_random
-    random_number = rand(0..99999)
-    random_number.to_s.rjust(5, "0")
+    rand(0..9999).to_s.rjust(5, "0")
+  end
+
+  def split_string
+    @number.split('')
+  end
+
+  def make_keys
+    keys = {
+      A: split_string[0..1].join.to_i,
+      B: split_string[1..2].join.to_i,
+      C: split_string[2..3].join.to_i,
+      D: split_string[3..4].join.to_i
+    }
+    keys
   end
 end
-
-
-
-
-#"%05d" padded zeroes
-#generate a hash A: 1 B: 2 ...
-# puts 1.to_s.rjust(3, "0")
-# #=> 001
-# puts 10.to_s.rjust(3, "0")
-# #=> 010
-# puts 100.to_s.rjust(3, "0")
-# #=> 100
