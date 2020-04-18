@@ -10,4 +10,9 @@ class ShiftTest < Minitest::Test
   def test_it_exists
     assert_instance_of  Shift, @shift
   end
+
+  def test_it_has_attributes
+    assert_equal @keys, @shift.keys
+    assert_equal @offset, @shift.offset
+  end
 end
