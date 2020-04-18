@@ -1,5 +1,4 @@
 class Key
-  def initialize
-    rand(99999)
+  def initialize(number)
   end
 end
