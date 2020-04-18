@@ -17,8 +17,7 @@ class ShiftTest < Minitest::Test
   end
 
   def test_can_make_shift_hash
-    expected = {:A=>3, :B=>13, :C=>18, :D=>70}
-    assert_equal expected, @shift.make_shift
+    assert_equal [3, 13, 18, 70], @shift.make_shift
   end
 
   def test_can_make_shifts_with_no_arguments
