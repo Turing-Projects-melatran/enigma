@@ -1,9 +1,8 @@
 class Key
-  attr_reader :number, :keys
+  attr_reader :number
 
   def initialize(number = generate_random)
     @number = number
-    @keys = {}
   end
 
   def generate_random
@@ -12,5 +11,15 @@ class Key
 
   def split_string
     @number.split('')
+  end
+
+  def make_keys
+    keys = {
+      A: split_string[0..1].join.to_i,
+      B: split_string[1..2].join.to_i,
+      C: split_string[2..3].join.to_i,
+      D: split_string[3..4].join.to_i
+    }
+    keys
   end
 end
