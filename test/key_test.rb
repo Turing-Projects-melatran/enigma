@@ -15,9 +15,13 @@ class KeyTest < Minitest::Test
   end
 
   def test_can_generate_random_number
-    rand = Key.new
-    rand.stubs(:rand).returns(2343)
+    random = Key.new
+    random.stubs(:rand).returns(2343)
 
-    assert_equal "02343", rand.generate_random
+    assert_equal "02343", random.generate_random
+  end
+
+  def test_can_split_string
+    assert_equal ["0", "1", "1", "6", "5"], @key.split_string
   end
 end
