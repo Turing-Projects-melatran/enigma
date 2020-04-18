@@ -14,9 +14,8 @@ class OffsetTest < Minitest::Test
   end
 
   def test_can_test_todays_date
-    today = Offset.new
-    Date.stubs(:today).returns(Date.new(17,04,20))
-    assert_equal "170420", today.date
+    Date.stubs(:today).returns(Date.new(2020, 04, 17))
+    assert_equal "170420", @date.current_date
   end
 
   def test_can_square_the_date
