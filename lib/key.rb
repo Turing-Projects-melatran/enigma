@@ -7,12 +7,9 @@ class Key
   end
 
   def generate_random
-    random_number = rand(0..99999)
-    random_number.to_s.rjust(5, "0")
+    rand(0..9999).to_s.rjust(5, "0")
   end
 end
-
-
 
 
 #"%05d" padded zeroes
@@ -23,3 +20,5 @@ end
 # #=> 010
 # puts 100.to_s.rjust(3, "0")
 # #=> 100
+
+#= rand(0..9999).to_s.rjust(5, "0")

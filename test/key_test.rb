@@ -15,6 +15,9 @@ class KeyTest < Minitest::Test
   end
 
   def test_can_generate_random_number
-    assert_equal "01307", @key.generate_random
+    rand = Key.new
+    rand.stubs(:rand).returns(2343)
+
+    assert_equal "02343", rand.generate_random
   end
 end
