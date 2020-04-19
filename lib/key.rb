@@ -1,12 +1,8 @@
 class Key
   attr_reader :number
 
-  def initialize(number = generate_random)
+  def initialize(number = rand(0..9999).to_s.rjust(5, "0"))
     @number = number
-  end
-
-  def generate_random
-    rand(0..9999).to_s.rjust(5, "0")
   end
 
   def split_string
