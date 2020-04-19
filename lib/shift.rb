@@ -45,4 +45,17 @@ class Shift
       @alphabet[value]
     end.join
   end
+
+  def calculate_backward_values(message) #dycryption
+    new_message = get_message_indexes(message)
+    rotated_shifts = make_shift
+    shifted_values = []
+    new_message.map do |message_index|
+      shifted_values << (message_index - rotated_shifts.first) %27
+      rotated_shifts = rotated_shifts.rotate!
+    end
+    shifted_values
+  end
+  
+
 end
