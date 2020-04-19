@@ -38,4 +38,11 @@ class Shift
     end
     shifted_values
   end
+
+  def forward_shift_message(message) #encrytion
+    forward_message = calculate_forward_values(message)
+    forward_message.map do |value|
+      @alphabet[value]
+    end.join
+  end
 end
