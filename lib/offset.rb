@@ -7,9 +7,9 @@ class Offset
     @date = date
   end
 
-  def current_date
-    Date.today.strftime("%d%m%y")
-  end
+  # def current_date
+  #   Date.today.strftime("%d%m%y")
+  # end
 
   def square
     (@date.to_i * @date.to_i).to_s
