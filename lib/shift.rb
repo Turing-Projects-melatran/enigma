@@ -22,8 +22,9 @@ class Shift
   end
 
   def get_message_indexes(message)
-    message.downcase.chars.map do |letter|
-      @alphabet.find_index(letter)
+    new_message = message.split('')
+    new_message.map do |letter|
+      find_index_of_letters(letter)
     end
   end
 end

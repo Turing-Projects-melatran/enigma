@@ -38,22 +38,11 @@ class ShiftTest < Minitest::Test
   end
 
   def test_can_get_message_indexes
-    skip
     keys = Key.new("0003")
     offset = Offset.new("010520")
     shift = Shift.new(keys, offset)
     shift.make_shift
 
     assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.get_message_indexes("love momo")
-  end
-
-  def test_can_forward_shift_message
-    skip
-    keys = Key.new("0003")
-    offset = Offset.new("010520")
-    shift = Shift.new(keys, offset)
-    shift.make_shift
-
-    assert_equal "lysg qrpo" , shift.forward_shift("love momo")
   end
 end
