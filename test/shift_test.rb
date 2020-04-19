@@ -8,7 +8,7 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_exists
-    assert_instance_of  Shift, @shift
+    assert_instance_of Shift, @shift
   end
 
   def test_it_has_attributes
@@ -20,17 +20,17 @@ class ShiftTest < Minitest::Test
     assert_equal [3, 13, 18, 70], @shift.make_shift
   end
 
-  def test_can_make_shifts_with_no_arguments
-    keys = Key.new
-    offset = Offset.new
-    shift = Shift.new(keys, offset)
-
-    assert_instance_of Shift, shift
-    assert_equal keys, shift.key
-    assert_equal offset, shift.offset
-
-    assert_equal 4, shift.make_shift.length
-  end
+  # def test_can_make_shifts_with_no_arguments
+  #   keys = Key.new
+  #   offset = Offset.new
+  #   shift = Shift.new(keys, offset)
+  #
+  #   assert_instance_of Shift, shift
+  #   assert_equal keys, shift.key
+  #   assert_equal offset, shift.offset
+  #
+  #   assert_equal 4, shift.make_shift.length
+  # end
 
   def test_can_find_index_of_letters
     assert_equal 11, @shift.find_index_of_letters("l")

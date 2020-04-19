@@ -39,7 +39,7 @@ class Shift
     shifted_values
   end
 
-  def encryption(message) #encrytion
+  def encryption(message) #encryption
     forward_message = calculate_forward_shift(message)
     forward_message.map do |value|
       @alphabet[value]
