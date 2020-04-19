@@ -4,15 +4,12 @@ require './lib/offset'
 class Shift
   attr_reader :key, :offset, :alphabet
 
-  def initialize(key, offset)
-    @key = key
-    @offset = offset
-  end
-
-  def make_shift
-    key_hash = @key.make_keys
-    offset_hash = @offset.make_offset
-    shift_hash =key_hash.merge(offset_hash){|letter, key, offsets| key + offsets}
+  def make_shift(number, date)
+    key = Key.new(number)
+    key_hash = key.generate_keys
+    offset = Offset.new(date)
+    offset_hash = offset.generate_offset
+    shift_hash = key_hash.merge(offset_hash){|letter, key, offsets| key + offsets}
     shift_hash.values
   end
 
@@ -22,15 +19,16 @@ class Shift
   end
 
   def get_message_indexes(message)
+    @alphabet = ("a".."z").to_a << " "
     new_message = message.split('')
     new_message.map do |letter|
       find_index_of_letters(letter)
     end
   end
 
-  def calculate_forward_shift(message) #encryption
+  def calculate_forward_shift(message,number,date) #encryption
     new_message = get_message_indexes(message)
-    rotated_shifts = make_shift
+    rotated_shifts = make_shift(number, date)
     shifted_values = []
     new_message.map do |message_index|
       shifted_values << (message_index + rotated_shifts.first) %27
@@ -39,16 +37,16 @@ class Shift
     shifted_values
   end
 
-  def encryption(message) #encryption
-    forward_message = calculate_forward_shift(message)
+  def encryption(message,number,date) #encryption
+    forward_message = calculate_forward_shift(message,number,date)
     forward_message.map do |value|
       @alphabet[value]
     end.join
   end
 
-  def calculate_backward_shift(message) #decryption
+  def calculate_backward_shift(message,number,date) #decryption
     new_message = get_message_indexes(message)
-    rotated_shifts = make_shift
+    rotated_shifts = make_shift(number, date)
     shifted_values = []
     new_message.map do |message_index|
       shifted_values << (message_index - rotated_shifts.first) %27
@@ -57,8 +55,8 @@ class Shift
     shifted_values
   end
 
-  def decryption(message) #decryption
-    backwards_message = calculate_backward_shift(message)
+  def decryption(message,number,date) #decryption
+    backwards_message = calculate_backward_shift(message,number,date)
     backwards_message.map do |value|
       @alphabet[value]
     end.join

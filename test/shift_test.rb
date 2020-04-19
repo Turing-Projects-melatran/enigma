@@ -2,35 +2,17 @@ require './test/test_helper'
 
 class ShiftTest < Minitest::Test
   def setup
-    @keys = Key.new("01165")
-    @offset = Offset.new("092415")
-    @shift = Shift.new(@keys, @offset)
+    @shift = Shift.new
   end
 
   def test_it_exists
+    @shift = Shift.new
     assert_instance_of Shift, @shift
   end
 
-  def test_it_has_attributes
-    assert_equal @keys, @shift.key
-    assert_equal @offset, @shift.offset
-  end
-
   def test_can_make_shift
-    assert_equal [3, 13, 18, 70], @shift.make_shift
+    assert_equal [3, 13, 18, 70], @shift.make_shift("01165", "092415")
   end
-
-  # def test_can_make_shifts_with_no_arguments
-  #   keys = Key.new
-  #   offset = Offset.new
-  #   shift = Shift.new(keys, offset)
-  #
-  #   assert_instance_of Shift, shift
-  #   assert_equal keys, shift.key
-  #   assert_equal offset, shift.offset
-  #
-  #   assert_equal 4, shift.make_shift.length
-  # end
 
   def test_can_find_index_of_letters
     assert_equal 11, @shift.find_index_of_letters("l")
@@ -38,42 +20,24 @@ class ShiftTest < Minitest::Test
   end
 
   def test_can_get_message_indexes
-    keys = Key.new("0003")
-    offset = Offset.new("010520")
-    shift = Shift.new(keys, offset)
-    shift.make_shift
+    @shift.make_shift("0003", "010520")
 
-    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.get_message_indexes("love momo")
+    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], @shift.get_message_indexes("love momo")
   end
 
   def test_can_calculate_new_forward_shift
-    keys = Key.new("0003")
-    offset = Offset.new("010520")
-    shift = Shift.new(keys, offset)
-
-    assert_equal [11, 18, 24, 7, 26, 16, 17, 15, 14], shift.calculate_forward_shift("love momo")
+    assert_equal [11, 18, 24, 7, 26, 16, 17, 15, 14], @shift.calculate_forward_shift("love momo", "0003", "010520")
   end
 
   def test_it_can_do_encryption
-    keys = Key.new("0003")
-    offset = Offset.new("010520")
-    shift = Shift.new(keys, offset)
-
-    assert_equal "lsyh qrpo", shift.encryption("love momo")
+    assert_equal "lsyh qrpo", @shift.encryption("love momo", "0003", "010520")
   end
-
+  #
   def test_can_calculate_backward_shift_for_message
-    keys = Key.new("0003")
-    offset = Offset.new("010520")
-    shift = Shift.new(keys, offset)
-
-    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.calculate_backward_shift("lsyh qrpo")
+    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], @shift.calculate_backward_shift("lsyh qrpo","0003", "010520")
   end
 
   def test_can_do_decryption
-    keys = Key.new("0003")
-    offset = Offset.new("010520")
-    shift = Shift.new(keys, offset)
-    assert_equal "love momo", shift.decryption("lsyh qrpo")
+    assert_equal "love momo", @shift.decryption("lsyh qrpo","0003", "010520")
   end
 end
