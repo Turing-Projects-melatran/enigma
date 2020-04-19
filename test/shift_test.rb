@@ -69,4 +69,11 @@ class ShiftTest < Minitest::Test
 
     assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.calculate_backward_values("lsyh qrpo")
   end
+
+  def test_can_backward_shift
+    keys = Key.new("0003")
+    offset = Offset.new("010520")
+    shift = Shift.new(keys, offset)
+    assert_equal "love momo", shift.backward_shift_message("lsyh qrpo")
+  end
 end

@@ -56,6 +56,11 @@ class Shift
     end
     shifted_values
   end
-  
 
+  def backward_shift_message(message) #dycryption
+    backwards_message = calculate_backward_values(message)
+    backwards_message.map do |value|
+      @alphabet[value]
+    end.join
+  end
 end
