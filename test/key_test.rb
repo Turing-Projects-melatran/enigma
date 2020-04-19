@@ -14,18 +14,15 @@ class KeyTest < Minitest::Test
   end
 
   def test_can_generate_keys
-    assert_equal "01165", @key.generate_keys
+    expected = {:A=>01, :B=>11, :C=>16, :D=>65}
+    assert_equal expected, @key.generate_keys
   end
 
   def test_can_generate_random_number
     random = Key.new
     random.stubs(:rand).returns(2343)
-
-    assert_equal "02343", random.generate_keys
-  end
-
-  def test_can_split_string
-    assert_equal ["0", "1", "1", "6", "5"], @key.split_string
+    expected = {:A=>02, :B=>23, :C=>34, :D=>43}
+    assert_equal expected, random.generate_keys
   end
 
   def test_can_make_keys
