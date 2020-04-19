@@ -46,34 +46,34 @@ class ShiftTest < Minitest::Test
     assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.get_message_indexes("love momo")
   end
 
-  def test_can_calculate_new_forward_values_to_shift_message
+  def test_can_calculate_new_forward_shift
     keys = Key.new("0003")
     offset = Offset.new("010520")
     shift = Shift.new(keys, offset)
 
-    assert_equal [11, 18, 24, 7, 26, 16, 17, 15, 14], shift.calculate_forward_values("love momo")
+    assert_equal [11, 18, 24, 7, 26, 16, 17, 15, 14], shift.calculate_forward_shift("love momo")
   end
 
-  def test_can_forward_shift
+  def test_it_can_do_encryption
     keys = Key.new("0003")
     offset = Offset.new("010520")
     shift = Shift.new(keys, offset)
 
-    assert_equal "lsyh qrpo", shift.forward_shift_message("love momo")
+    assert_equal "lsyh qrpo", shift.encryption("love momo")
   end
 
-  def test_can_calculate_backward_values_for_message
+  def test_can_calculate_backward_shift_for_message
     keys = Key.new("0003")
     offset = Offset.new("010520")
     shift = Shift.new(keys, offset)
 
-    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.calculate_backward_values("lsyh qrpo")
+    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.calculate_backward_shift("lsyh qrpo")
   end
 
-  def test_can_backward_shift
+  def test_can_do_decryption
     keys = Key.new("0003")
     offset = Offset.new("010520")
     shift = Shift.new(keys, offset)
-    assert_equal "love momo", shift.backward_shift_message("lsyh qrpo")
+    assert_equal "love momo", shift.decryption("lsyh qrpo")
   end
 end

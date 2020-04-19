@@ -28,7 +28,7 @@ class Shift
     end
   end
 
-  def calculate_forward_values(message) #encryption
+  def calculate_forward_shift(message) #encryption
     new_message = get_message_indexes(message)
     rotated_shifts = make_shift
     shifted_values = []
@@ -39,14 +39,14 @@ class Shift
     shifted_values
   end
 
-  def forward_shift_message(message) #encrytion
-    forward_message = calculate_forward_values(message)
+  def encryption(message) #encrytion
+    forward_message = calculate_forward_shift(message)
     forward_message.map do |value|
       @alphabet[value]
     end.join
   end
 
-  def calculate_backward_values(message) #dycryption
+  def calculate_backward_shift(message) #decryption
     new_message = get_message_indexes(message)
     rotated_shifts = make_shift
     shifted_values = []
@@ -57,8 +57,8 @@ class Shift
     shifted_values
   end
 
-  def backward_shift_message(message) #dycryption
-    backwards_message = calculate_backward_values(message)
+  def decryption(message) #decryption
+    backwards_message = calculate_backward_shift(message)
     backwards_message.map do |value|
       @alphabet[value]
     end.join
