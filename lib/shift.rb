@@ -2,22 +2,22 @@ require './lib/key'
 require './lib/offset'
 
 class Shift
-  attr_reader :keys, :offset, :alphabet
+  attr_reader :key, :offset, :alphabet
 
-  def initialize(keys, offset)
-    @keys = keys
+  def initialize(key, offset)
+    @key = key
     @offset = offset
-    @alphabet = ("a".."z").to_a << " "
   end
 
   def make_shift
-    keys_hash = @keys.make_keys
+    key_hash = @key.make_keys
     offset_hash = @offset.make_offset
-    shift_hash =keys_hash.merge(offset_hash){|letter, keys, offsets| keys + offsets}
+    shift_hash =key_hash.merge(offset_hash){|letter, key, offsets| key + offsets}
     shift_hash.values
   end
 
   def find_index_of_letters(letter)
+    @alphabet = ("a".."z").to_a << " "
     @alphabet.find_index(letter)
   end
 
@@ -28,7 +28,7 @@ class Shift
     end
   end
 
-  def calculate_forward_values(message) #encryption
+  def calculate_forward_shift(message) #encryption
     new_message = get_message_indexes(message)
     rotated_shifts = make_shift
     shifted_values = []
@@ -39,14 +39,14 @@ class Shift
     shifted_values
   end
 
-  def forward_shift_message(message) #encrytion
-    forward_message = calculate_forward_values(message)
+  def encryption(message) #encryption
+    forward_message = calculate_forward_shift(message)
     forward_message.map do |value|
       @alphabet[value]
     end.join
   end
 
-  def calculate_backward_values(message) #dycryption
+  def calculate_backward_shift(message) #decryption
     new_message = get_message_indexes(message)
     rotated_shifts = make_shift
     shifted_values = []
@@ -57,8 +57,8 @@ class Shift
     shifted_values
   end
 
-  def backward_shift_message(message) #dycryption
-    backwards_message = calculate_backward_values(message)
+  def decryption(message) #decryption
+    backwards_message = calculate_backward_shift(message)
     backwards_message.map do |value|
       @alphabet[value]
     end.join
