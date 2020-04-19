@@ -16,7 +16,7 @@ class ShiftTest < Minitest::Test
     assert_equal @offset, @shift.offset
   end
 
-  def test_can_make_shift_hash
+  def test_can_make_shift
     assert_equal [3, 13, 18, 70], @shift.make_shift
   end
 
@@ -30,5 +30,30 @@ class ShiftTest < Minitest::Test
     assert_equal offset, shift.offset
 
     assert_equal 4, shift.make_shift.length
+  end
+
+  def test_can_find_index_of_letters
+    assert_equal 11, @shift.find_index_of_letters("l")
+    assert_equal 12, @shift.find_index_of_letters("m")
+  end
+
+  def test_can_get_message_indexes
+    skip
+    keys = Key.new("0003")
+    offset = Offset.new("010520")
+    shift = Shift.new(keys, offset)
+    shift.make_shift
+
+    assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.get_message_indexes("love momo")
+  end
+
+  def test_can_forward_shift_message
+    skip
+    keys = Key.new("0003")
+    offset = Offset.new("010520")
+    shift = Shift.new(keys, offset)
+    shift.make_shift
+
+    assert_equal "lysg qrpo" , shift.forward_shift("love momo")
   end
 end

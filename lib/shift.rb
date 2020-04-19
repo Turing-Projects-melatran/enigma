@@ -2,11 +2,12 @@ require './lib/key'
 require './lib/offset'
 
 class Shift
-  attr_reader :keys, :offset
+  attr_reader :keys, :offset, :alphabet
 
   def initialize(keys, offset)
     @keys = keys
     @offset = offset
+    @alphabet = ("a".."z").to_a << " "
   end
 
   def make_shift
@@ -16,5 +17,13 @@ class Shift
     shift_hash.values
   end
 
+  def find_index_of_letters(letter)
+    @alphabet.find_index(letter)
+  end
 
+  def get_message_indexes(message)
+    message.downcase.chars.map do |letter|
+      @alphabet.find_index(letter)
+    end
+  end
 end
