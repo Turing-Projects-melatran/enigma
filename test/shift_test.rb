@@ -12,7 +12,7 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_equal @keys, @shift.keys
+    assert_equal @keys, @shift.key
     assert_equal @offset, @shift.offset
   end
 
@@ -26,7 +26,7 @@ class ShiftTest < Minitest::Test
     shift = Shift.new(keys, offset)
 
     assert_instance_of Shift, shift
-    assert_equal keys, shift.keys
+    assert_equal keys, shift.key
     assert_equal offset, shift.offset
 
     assert_equal 4, shift.make_shift.length

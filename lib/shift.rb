@@ -2,22 +2,22 @@ require './lib/key'
 require './lib/offset'
 
 class Shift
-  attr_reader :keys, :offset, :alphabet
+  attr_reader :key, :offset, :alphabet
 
-  def initialize(keys, offset)
-    @keys = keys
+  def initialize(key, offset)
+    @key = key
     @offset = offset
-    @alphabet = ("a".."z").to_a << " "
   end
 
   def make_shift
-    keys_hash = @keys.make_keys
+    key_hash = @key.make_keys
     offset_hash = @offset.make_offset
-    shift_hash =keys_hash.merge(offset_hash){|letter, keys, offsets| keys + offsets}
+    shift_hash =key_hash.merge(offset_hash){|letter, key, offsets| key + offsets}
     shift_hash.values
   end
 
   def find_index_of_letters(letter)
+    @alphabet = ("a".."z").to_a << " "
     @alphabet.find_index(letter)
   end
 
