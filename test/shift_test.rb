@@ -45,4 +45,12 @@ class ShiftTest < Minitest::Test
 
     assert_equal [11, 14, 21, 4, 26, 12, 14, 12, 14], shift.get_message_indexes("love momo")
   end
+
+  def test_can_calculate_new_forward_values_to_shift_message
+    keys = Key.new("0003")
+    offset = Offset.new("010520")
+    shift = Shift.new(keys, offset)
+
+    assert_equal [11, 18, 24, 7, 26, 16, 17, 15, 14], shift.calculate_forward_values("love momo")
+  end
 end

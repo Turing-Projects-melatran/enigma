@@ -27,4 +27,15 @@ class Shift
       find_index_of_letters(letter)
     end
   end
+
+  def calculate_forward_values(message) #encryption
+    new_message = get_message_indexes(message)
+    rotated_shifts = make_shift
+    shifted_values = []
+    new_message.map do |message_index|
+      shifted_values << (message_index + rotated_shifts.first) %27
+      rotated_shifts = rotated_shifts.rotate!
+    end
+    shifted_values
+  end
 end
