@@ -13,6 +13,17 @@ class KeyTest < Minitest::Test
     assert_equal "01165", @key.number
   end
 
+  def test_can_generate_keys
+    assert_equal "01165", @key.generate_keys
+  end
+
+  def test_can_generate_random_number
+    random = Key.new
+    random.stubs(:rand).returns(2343)
+
+    assert_equal "02343", random.generate_keys
+  end
+
   def test_can_split_string
     assert_equal ["0", "1", "1", "6", "5"], @key.split_string
   end

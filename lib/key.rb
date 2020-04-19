@@ -1,8 +1,16 @@
 class Key
   attr_reader :number
 
-  def initialize(number = rand(0..9999).to_s.rjust(5, "0"))
+  def initialize(number = nil)
     @number = number
+  end
+
+  def generate_keys
+    if @number.nil?
+      rand(0..9999).to_s.rjust(5, "0")
+    else
+      @number.to_s
+    end
   end
 
   def split_string
