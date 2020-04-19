@@ -9,21 +9,16 @@ class Offset
 
   def generate_offset
     if @date.nil?
-      Date.today.strftime("%d%m%y")
+      @date = Date.today.strftime("%d%m%y")
     else
       @date.to_s
     end
-  end
-
-  def square
-    (@date.to_i * @date.to_i).to_s
-  end
-
-  def last_four
-    square.split('')[-4..-1]
+    make_offset
   end
 
   def make_offset
+    number = (@date.to_i * @date.to_i).to_s
+    last_four = number.split('')[-4..-1]
     {
       A: last_four[0].to_i,
       B: last_four[1].to_i,
