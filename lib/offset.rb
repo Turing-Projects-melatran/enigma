@@ -3,13 +3,17 @@ require 'date'
 class Offset
   attr_reader :date
 
-  def initialize(date = Date.today.strftime("%d%m%y"))
+  def initialize(date = nil)
     @date = date
   end
 
-  # def current_date
-  #   Date.today.strftime("%d%m%y")
-  # end
+  def generate_offset
+    if @date.nil?
+      Date.today.strftime("%d%m%y")
+    else
+      @date.to_s
+    end
+  end
 
   def square
     (@date.to_i * @date.to_i).to_s
