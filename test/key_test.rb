@@ -13,14 +13,24 @@ class KeyTest < Minitest::Test
     assert_equal "01165", @key.number
   end
 
-  def test_can_split_string
-    assert_equal ["0", "1", "1", "6", "5"], @key.split_string
-  end
-
   def test_can_make_keys
     expected = {
       A: 01, B: 11, C: 16, D: 65
     }
     assert_equal expected, @key.make_keys
+  end
+
+  def test_random_number
+    new = Key.new
+    new.stubs(:number).returns("02343")
+    assert_equal "02343", new.number
+  end
+
+  def test_random_number_to_make_keys
+    new = Key.new
+    new.stubs(:number).returns("02343")
+
+    expected = {A: 02, B: 23, C: 34, D: 43}
+    assert_equal expected, new.make_keys
   end
 end
