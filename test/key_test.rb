@@ -2,7 +2,7 @@ require './test/test_helper'
 
 class KeyTest < Minitest::Test
   def setup
-    @key = Key.new("01165")
+    @key = Key.new("0003")
   end
 
   def test_it_exists
@@ -10,12 +10,12 @@ class KeyTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    assert_equal "01165", @key.key
+    assert_equal "0003", @key.key
   end
 
   def test_can_make_keys
     expected = {
-      A: 01, B: 11, C: 16, D: 65
+      A: 00, B: 00, C: 03, D: 03
     }
     assert_equal expected, @key.make_keys
   end

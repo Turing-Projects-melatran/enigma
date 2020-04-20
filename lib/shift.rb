@@ -1,66 +1,53 @@
-require './lib/key'
-require './lib/offset'
-
 class Shift
-  attr_reader :key, :offset, :alphabet
+  attr_reader :message, :key, :offset
 
-  def initialize(key, offset)
+  def initialize(message, key, offset)
+    @message = message.downcase
     @key = key
     @offset = offset
   end
 
-  def make_shift
-    key_hash = @key.make_keys
-    offset_hash = @offset.make_offset
-    shift_hash =key_hash.merge(offset_hash){|letter, key, offsets| key + offsets}
-    shift_hash.values
+  def generate_keys
+    Key.new(@key).make_keys
   end
 
-  def find_index_of_letters(letter)
-    @alphabet = ("a".."z").to_a << " "
-    @alphabet.find_index(letter)
+  def generate_offset
+    Offset.new(@offset).make_offset
   end
 
-  def get_message_indexes(message)
-    new_message = message.split('')
-    new_message.map do |letter|
-      find_index_of_letters(letter)
-    end
+  def make_initial_shift
+    hash = generate_keys.merge(generate_offset){|letter, key, offsets| key + offsets}
+    hash.values
   end
 
-  def calculate_forward_shift(message) #encryption
-    new_message = get_message_indexes(message)
-    rotated_shifts = make_shift
-    shifted_values = []
-    new_message.map do |message_index|
-      shifted_values << (message_index + rotated_shifts.first) %27
-      rotated_shifts = rotated_shifts.rotate!
-    end
-    shifted_values
-  end
-
-  def encryption(message) #encryption
-    forward_message = calculate_forward_shift(message)
-    forward_message.map do |value|
-      @alphabet[value]
-    end.join
-  end
-
-  def calculate_backward_shift(message) #decryption
-    new_message = get_message_indexes(message)
-    rotated_shifts = make_shift
-    shifted_values = []
-    new_message.map do |message_index|
-      shifted_values << (message_index - rotated_shifts.first) %27
-      rotated_shifts = rotated_shifts.rotate!
-    end
-    shifted_values
-  end
-
-  def decryption(message) #decryption
-    backwards_message = calculate_backward_shift(message)
-    backwards_message.map do |value|
-      @alphabet[value]
-    end.join
+  def final_shift_rotation
+    rotate_shift = make_initial_shift.first
+    make_initial_shift.rotate!
+    rotate_shift
   end
 end
+#
+#   def rotate_shift(array_of_shift_values)
+#    key = array_of_shift_values.first
+#    array_of_shift_values.rotate!
+#    key
+#   end
+#
+# #.chars splits a message into indivdiaul letters
+#   def encryption(message, key, offset) #encryption
+#     shift_values = make_shift(key, offset).values
+#     alphabet = ("a".."z").to_a << " "
+#     message.downcase.chars.map do |letter|
+#       index_of_letter = alphabet.index(letter)
+#       alphabet.rotate(index_of_letter + rotate_shift(shift_values)).first
+#     end.join
+#   end
+#
+#   def decryption(message, key, offset) #decryption
+#     shift_values = make_shift(key, offset).values
+#     alphabet = ("a".."z").to_a << " "
+#     message.downcase.chars.map do |letter|
+#       index_of_letter = alphabet.index(letter)
+#       alphabet.rotate(index_of_letter - rotate_shift(shift_values)).first
+#     end.join
+#   end
