@@ -6,15 +6,17 @@ class Offset
   def initialize(date = Date.today.strftime("%d%m%y"))
     @date = date
   end
-  
+
+  def square
+    @date.to_i * @date.to_i
+  end
+
   def make_offset
-    square = (@date.to_i * @date.to_i).to_s
-    last_four = square.split('')[-4..-1]
     {
-      A: last_four[0].to_i,
-      B: last_four[1].to_i,
-      C: last_four[2].to_i,
-      D: last_four[3].to_i
+      A: square.to_s[-4].to_i,
+      B: square.to_s[-3].to_i,
+      C: square.to_s[-2].to_i,
+      D: square.to_s[-1].to_i
     }
   end
 end
