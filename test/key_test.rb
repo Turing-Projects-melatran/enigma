@@ -29,8 +29,8 @@ class KeyTest < Minitest::Test
   def test_random_key_to_make_keys
     new = Key.new
     new.stubs(:key).returns("02343")
-
     expected = {A: 02, B: 23, C: 34, D: 43}
+    
     assert_equal expected, new.make_keys
   end
 end
