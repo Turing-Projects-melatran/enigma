@@ -46,4 +46,26 @@ class EnigmaTest < Minitest::Test
       }
       assert_equal expected, @enigma.decrypt("pib wdmczpu", "02715")
   end
+
+  def test_it_can_encrypt_with_no_arguments
+    @enigma.stubs(:rand).returns("02715")
+    @enigma.stubs(:date).returns("200420")
+    expected = {
+      encryption: "pib wdmczpu",
+      key: "02715",
+      date: "200420"
+      }
+    assert_equal expected, @enigma.encrypt("hello world")
+  end
+
+  def test_it_can_decrypt_with_no_arguments
+    @enigma.stubs(:rand).returns("02715")
+    @enigma.stubs(:date).returns("200420")
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "200420"
+      }
+    assert_equal expected, @enigma.decrypt("pib wdmczpu")
+  end
 end
