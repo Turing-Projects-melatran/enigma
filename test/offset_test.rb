@@ -19,7 +19,7 @@ class OffsetTest < Minitest::Test
 
   def test_can_create_date_hash
     #2225
-    expected = {A: 2, B: 2, C: 2, D: 5}
+    expected = {A: 02, B: 02, C: 02, D: 05}
 
     assert_equal expected, @date.make_offset
   end
