@@ -70,7 +70,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_can_decrypt_with_key
-     encrypted = @enigma.encrypt("hello world", "02715")
+    encrypted = @enigma.encrypt("hello world", "02715")
     expected = {
       decryption: "hello world",
       key: "02715",
