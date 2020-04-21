@@ -28,7 +28,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_with_today
-    @enigma.stubs(:date).returns("200420")
+    Date.stubs(:today).returns(Date.new(2020, 04,20))
     expected = {
       encryption: "pib wdmczpu",
       key: "02715",
@@ -38,7 +38,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_decrypt_with_today
-    @enigma.stubs(:date).returns("200420")
+    Date.stubs(:today).returns(Date.new(2020, 04,20))
     expected = {
       decryption: "hello world",
       key: "02715",
@@ -49,7 +49,7 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_encrypt_with_no_arguments
     @enigma.stubs(:rand).returns("02715")
-    @enigma.stubs(:date).returns("200420")
+    Date.stubs(:today).returns(Date.new(2020, 04,20))
     expected = {
       encryption: "pib wdmczpu",
       key: "02715",
@@ -60,7 +60,7 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_decrypt_with_no_arguments
     @enigma.stubs(:rand).returns("02715")
-    @enigma.stubs(:date).returns("200420")
+    Date.stubs(:today).returns(Date.new(2020, 04,20))
     expected = {
       decryption: "hello world",
       key: "02715",
@@ -71,6 +71,7 @@ class EnigmaTest < Minitest::Test
 
   def test_can_decrypt_with_key
     encrypted = @enigma.encrypt("hello world", "02715")
+    Date.stubs(:today).returns(Date.new(2020, 04,20))
     expected = {
       decryption: "hello world",
       key: "02715",
