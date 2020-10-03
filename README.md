@@ -1,6 +1,9 @@
 # Engima Final Project
 
-This is the final independent project for Mod1.
+Enigma is inspired by how Alan Turing cracked the enigma code. This is a test-driven object-oriented solution that can decrypt and encrypt messages.
+This is a final project for Turing School of Software and Design for the Backend Engineering program in Mod 1.
+
+Visit [here](https://backend.turing.io/module1/projects/enigma/index) for information about the project
 
 ### Self Assessment
 
